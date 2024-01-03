@@ -6,6 +6,7 @@ class AwsCdk < Formula
   url "https://registry.npmjs.org/aws-cdk/-/aws-cdk-2.115.0.tgz"
   sha256 "19b9c344ad80e936731809ac3998542c171ea7b5f47cd74f81e137552097dab5"
   license "Apache-2.0"
+  revision 1
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_sonoma:   "c31faf6663ec2652c7ffbc025369bdf2365d79b8f815da2da95e8377ef3f6621"
@@ -16,7 +17,9 @@ class AwsCdk < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "e642ede7e4ff2d2c2628d400360a59ac3a013b6979224525fc3fd8114ed5d42e"
   end
 
-  depends_on "node"
+  # upstream recommends to build/test with latest LTS node version
+  # https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_prerequisites
+  depends_on "node@20"
 
   def install
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)
